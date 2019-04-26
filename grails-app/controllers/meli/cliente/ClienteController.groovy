@@ -18,7 +18,6 @@ class ClienteController {
 
     }
 
-
     def mostrarAgencias(){
         def site = params.site_id
         def payment_methods_id = params.payment_methods_id
@@ -31,12 +30,12 @@ class ClienteController {
         connection.setRequestMethod("GET")
         connection.setRequestProperty("Accept","application/json")
         connection.setRequestProperty("User-Agent","Mozilla/5.0")
-
+        if (connection.responseCode == 500){
+            return "ERROR"
+        }
         JsonSlurper json = new JsonSlurper()
         def result = json.parse(connection.getInputStream())
         render result as JSON
-
-
     }
 }
 

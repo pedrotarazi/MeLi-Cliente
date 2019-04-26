@@ -78,10 +78,11 @@
 
         var URL = "${createLink(controller: 'Cliente', action: 'mostrarAgencias', params: [site_id: ""])}"+site_id+
             "&payment_methods_id="+payment_method_id+"&near_to="+lat_long+"&limit="+limit+"&offset="+offset+"&order_by="+order_by;
-        console.log(URL);
         $.ajax({
             url: URL,
             success: function(resp){
+                console.log(URL);
+
                 // var cat_head = document.getElementById("category_head");
                 // console.log(site);
                 // console.log(resp.data)
@@ -97,7 +98,7 @@
                 intro.innerText = "Agencias cercanas: ";
                 intro.style = "display: block; font-size: 24px";
                 col_div.appendChild(intro)
-                val.forEach(function(data){
+                val.forEach(function (data) {
                     var inicio = document.createElement("P");
                     inicio.innerText = "Agencia: ";
                     var dire = document.createElement("P");
@@ -111,25 +112,40 @@
                     dire.style = "display: block; font-size: 12px";
                     ciudad.style = "display: block; font-size: 10px";
                     pais.style = "display: block; font-size: 10px";
-
+                    var like = document.createElement("BUTTON");
+                    like.textContent = "LIKE";
+                    like.setAttribute("onClick", "like()");
+                    // like.onclick = like();
+                    var unlike = document.createElement("BUTTON");
+                    unlike.textContent = "UNLIKE";
+                    unlike.setAttribute("onClick", "unlike()");
+                    %{--like.onclick = ${like()};--}%
                     // console.log(data.address);
                     // console.log(data.address.address_line);
-
+                    col_div.appendChild(like)
+                    col_div.appendChild(unlike)
                     col_div.appendChild(inicio)
                     col_div.appendChild(dire)
                     col_div.appendChild(ciudad)
                     col_div.appendChild(pais)
                     col_div.appendChild(texto4)
-
-
                 })
+
                 subcats_element.appendChild(col_div)
             }
         })
     };
+    function like() {
+        console.log("LIKE");
+        document.write("LIKE");
+    };
+
+    function unlike() {
+        console.log("UNLIKE");
+        document.write("UNLIKE");
+    }
 
 </script>
-
 
 <div class="container-fluid">
     %{--    <h2 id="category_head"></h2>--}%
@@ -143,3 +159,4 @@
 
 </body>
 </html>
+
